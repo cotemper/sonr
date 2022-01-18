@@ -52,57 +52,106 @@ export function networkTypeToJSON(object: NetworkType): string {
   }
 }
 
-/** ServiceModule are additional modules that can be installed on custom services on the Sonr network. */
-export enum ServiceModule {
-  /** SERVICE_MODULE_UNSPECIFIED - SERVICE_MODULE_UNSPECIFIED is the default value. */
-  SERVICE_MODULE_UNSPECIFIED = 0,
-  /** SERVICE_MODULE_BUCKETS - SERVICE_MODULE_BUCKETS is the module that provides the ability to store and retrieve data. */
-  SERVICE_MODULE_BUCKETS = 1,
-  /** SERVICE_MODULE_CHANNEL - SERVICE_MODULE_CHANNEL is the module that provides the ability to communicate with other services. */
-  SERVICE_MODULE_CHANNEL = 2,
-  /** SERVICE_MODULE_OBJECTS - SERVICE_MODULE_OBJECTS is the module that provides the ability to create new schemas for data on the network. */
-  SERVICE_MODULE_OBJECTS = 3,
-  /** SERVICE_MODULE_FUNCTIONS - SERVICE_MODULE_FUNCTIONS is the module that provides the ability to create new functions for data on the network. */
-  SERVICE_MODULE_FUNCTIONS = 4,
+/** ServiceProtocol are core modules that can be installed on custom services on the Sonr network. */
+export enum ServiceProtocol {
+  /** SERVICE_PROTOCOL_UNSPECIFIED - SERVICE_PROTOCOL_UNSPECIFIED is the default value. */
+  SERVICE_PROTOCOL_UNSPECIFIED = 0,
+  /** SERVICE_PROTOCOL_BUCKETS - SERVICE_PROTOCOL_BUCKETS is the module that provides the ability to store and retrieve data. */
+  SERVICE_PROTOCOL_BUCKETS = 1,
+  /** SERVICE_PROTOCOL_CHANNEL - SERVICE_PROTOCOL_CHANNEL is the module that provides the ability to communicate with other services. */
+  SERVICE_PROTOCOL_CHANNEL = 2,
+  /** SERVICE_PROTOCOL_OBJECTS - SERVICE_PROTOCOL_OBJECTS is the module that provides the ability to create new schemas for data on the network. */
+  SERVICE_PROTOCOL_OBJECTS = 3,
+  /** SERVICE_PROTOCOL_FUNCTIONS - SERVICE_PROTOCOL_FUNCTIONS is the module that provides the ability to create new functions for data on the network. */
+  SERVICE_PROTOCOL_FUNCTIONS = 4,
   UNRECOGNIZED = -1,
 }
 
-export function serviceModuleFromJSON(object: any): ServiceModule {
+export function serviceProtocolFromJSON(object: any): ServiceProtocol {
   switch (object) {
     case 0:
-    case "SERVICE_MODULE_UNSPECIFIED":
-      return ServiceModule.SERVICE_MODULE_UNSPECIFIED;
+    case "SERVICE_PROTOCOL_UNSPECIFIED":
+      return ServiceProtocol.SERVICE_PROTOCOL_UNSPECIFIED;
     case 1:
-    case "SERVICE_MODULE_BUCKETS":
-      return ServiceModule.SERVICE_MODULE_BUCKETS;
+    case "SERVICE_PROTOCOL_BUCKETS":
+      return ServiceProtocol.SERVICE_PROTOCOL_BUCKETS;
     case 2:
-    case "SERVICE_MODULE_CHANNEL":
-      return ServiceModule.SERVICE_MODULE_CHANNEL;
+    case "SERVICE_PROTOCOL_CHANNEL":
+      return ServiceProtocol.SERVICE_PROTOCOL_CHANNEL;
     case 3:
-    case "SERVICE_MODULE_OBJECTS":
-      return ServiceModule.SERVICE_MODULE_OBJECTS;
+    case "SERVICE_PROTOCOL_OBJECTS":
+      return ServiceProtocol.SERVICE_PROTOCOL_OBJECTS;
     case 4:
-    case "SERVICE_MODULE_FUNCTIONS":
-      return ServiceModule.SERVICE_MODULE_FUNCTIONS;
+    case "SERVICE_PROTOCOL_FUNCTIONS":
+      return ServiceProtocol.SERVICE_PROTOCOL_FUNCTIONS;
     case -1:
     case "UNRECOGNIZED":
     default:
-      return ServiceModule.UNRECOGNIZED;
+      return ServiceProtocol.UNRECOGNIZED;
   }
 }
 
-export function serviceModuleToJSON(object: ServiceModule): string {
+export function serviceProtocolToJSON(object: ServiceProtocol): string {
   switch (object) {
-    case ServiceModule.SERVICE_MODULE_UNSPECIFIED:
-      return "SERVICE_MODULE_UNSPECIFIED";
-    case ServiceModule.SERVICE_MODULE_BUCKETS:
-      return "SERVICE_MODULE_BUCKETS";
-    case ServiceModule.SERVICE_MODULE_CHANNEL:
-      return "SERVICE_MODULE_CHANNEL";
-    case ServiceModule.SERVICE_MODULE_OBJECTS:
-      return "SERVICE_MODULE_OBJECTS";
-    case ServiceModule.SERVICE_MODULE_FUNCTIONS:
-      return "SERVICE_MODULE_FUNCTIONS";
+    case ServiceProtocol.SERVICE_PROTOCOL_UNSPECIFIED:
+      return "SERVICE_PROTOCOL_UNSPECIFIED";
+    case ServiceProtocol.SERVICE_PROTOCOL_BUCKETS:
+      return "SERVICE_PROTOCOL_BUCKETS";
+    case ServiceProtocol.SERVICE_PROTOCOL_CHANNEL:
+      return "SERVICE_PROTOCOL_CHANNEL";
+    case ServiceProtocol.SERVICE_PROTOCOL_OBJECTS:
+      return "SERVICE_PROTOCOL_OBJECTS";
+    case ServiceProtocol.SERVICE_PROTOCOL_FUNCTIONS:
+      return "SERVICE_PROTOCOL_FUNCTIONS";
+    default:
+      return "UNKNOWN";
+  }
+}
+
+/** ServiceType is the type of service that is being registered. */
+export enum ServiceType {
+  /** SERVICE_TYPE_UNSPECIFIED - SERVICE_TYPE_UNSPECIFIED is the default value. */
+  SERVICE_TYPE_UNSPECIFIED = 0,
+  /** SERVICE_TYPE_DID_COMM_MESSAGING - SERVICE_TYPE_APPLICATION is the type of service that is a DApp. */
+  SERVICE_TYPE_DID_COMM_MESSAGING = 1,
+  /** SERVICE_TYPE_LINKED_DOMAINS - SERVICE_TYPE_SERVICE is the type of service that is a service. */
+  SERVICE_TYPE_LINKED_DOMAINS = 2,
+  /** SERVICE_TYPE_SONR - SERVICE_TYPE_SONR is the type of service that is a DApp. */
+  SERVICE_TYPE_SONR = 3,
+  UNRECOGNIZED = -1,
+}
+
+export function serviceTypeFromJSON(object: any): ServiceType {
+  switch (object) {
+    case 0:
+    case "SERVICE_TYPE_UNSPECIFIED":
+      return ServiceType.SERVICE_TYPE_UNSPECIFIED;
+    case 1:
+    case "SERVICE_TYPE_DID_COMM_MESSAGING":
+      return ServiceType.SERVICE_TYPE_DID_COMM_MESSAGING;
+    case 2:
+    case "SERVICE_TYPE_LINKED_DOMAINS":
+      return ServiceType.SERVICE_TYPE_LINKED_DOMAINS;
+    case 3:
+    case "SERVICE_TYPE_SONR":
+      return ServiceType.SERVICE_TYPE_SONR;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ServiceType.UNRECOGNIZED;
+  }
+}
+
+export function serviceTypeToJSON(object: ServiceType): string {
+  switch (object) {
+    case ServiceType.SERVICE_TYPE_UNSPECIFIED:
+      return "SERVICE_TYPE_UNSPECIFIED";
+    case ServiceType.SERVICE_TYPE_DID_COMM_MESSAGING:
+      return "SERVICE_TYPE_DID_COMM_MESSAGING";
+    case ServiceType.SERVICE_TYPE_LINKED_DOMAINS:
+      return "SERVICE_TYPE_LINKED_DOMAINS";
+    case ServiceType.SERVICE_TYPE_SONR:
+      return "SERVICE_TYPE_SONR";
     default:
       return "UNKNOWN";
   }
@@ -165,9 +214,9 @@ export interface Service {
   /** ID is the DID of the service. */
   id: string;
   /** Type is the type of the service. */
-  type: string;
+  type: ServiceType;
   /** ServiceEndpoint is the endpoint of the service. */
-  serviceEndpoint: string;
+  serviceEndpoint: ServiceEndpoint | undefined;
   /** Metadata is the metadata of the service. */
   metadata: { [key: string]: string };
 }
@@ -175,6 +224,19 @@ export interface Service {
 export interface Service_MetadataEntry {
   key: string;
   value: string;
+}
+
+/** ServiceEndpoint is the endpoint of the service. */
+export interface ServiceEndpoint {
+  /** TransportType is the type of transport used to connect to the service. */
+  transportType: string;
+  /** Network is the network the service is on. */
+  network: string;
+  /**
+   * SupportedProtocols is the list of protocols supported by the service.
+   * (e.g. "channels", "buckets", "objects", "storage")
+   */
+  supportedProtocols: ServiceProtocol[];
 }
 
 /** VerificationMethod is a method that can be used to verify the DID. */
@@ -884,18 +946,21 @@ export const DidDocument_MetadataEntry = {
   },
 };
 
-const baseService: object = { id: "", type: "", serviceEndpoint: "" };
+const baseService: object = { id: "", type: 0 };
 
 export const Service = {
   encode(message: Service, writer: Writer = Writer.create()): Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
     }
-    if (message.type !== "") {
-      writer.uint32(18).string(message.type);
+    if (message.type !== 0) {
+      writer.uint32(16).int32(message.type);
     }
-    if (message.serviceEndpoint !== "") {
-      writer.uint32(26).string(message.serviceEndpoint);
+    if (message.serviceEndpoint !== undefined) {
+      ServiceEndpoint.encode(
+        message.serviceEndpoint,
+        writer.uint32(26).fork()
+      ).ldelim();
     }
     Object.entries(message.metadata).forEach(([key, value]) => {
       Service_MetadataEntry.encode(
@@ -918,10 +983,13 @@ export const Service = {
           message.id = reader.string();
           break;
         case 2:
-          message.type = reader.string();
+          message.type = reader.int32() as any;
           break;
         case 3:
-          message.serviceEndpoint = reader.string();
+          message.serviceEndpoint = ServiceEndpoint.decode(
+            reader,
+            reader.uint32()
+          );
           break;
         case 4:
           const entry4 = Service_MetadataEntry.decode(reader, reader.uint32());
@@ -946,17 +1014,19 @@ export const Service = {
       message.id = "";
     }
     if (object.type !== undefined && object.type !== null) {
-      message.type = String(object.type);
+      message.type = serviceTypeFromJSON(object.type);
     } else {
-      message.type = "";
+      message.type = 0;
     }
     if (
       object.serviceEndpoint !== undefined &&
       object.serviceEndpoint !== null
     ) {
-      message.serviceEndpoint = String(object.serviceEndpoint);
+      message.serviceEndpoint = ServiceEndpoint.fromJSON(
+        object.serviceEndpoint
+      );
     } else {
-      message.serviceEndpoint = "";
+      message.serviceEndpoint = undefined;
     }
     if (object.metadata !== undefined && object.metadata !== null) {
       Object.entries(object.metadata).forEach(([key, value]) => {
@@ -969,9 +1039,11 @@ export const Service = {
   toJSON(message: Service): unknown {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id);
-    message.type !== undefined && (obj.type = message.type);
+    message.type !== undefined && (obj.type = serviceTypeToJSON(message.type));
     message.serviceEndpoint !== undefined &&
-      (obj.serviceEndpoint = message.serviceEndpoint);
+      (obj.serviceEndpoint = message.serviceEndpoint
+        ? ServiceEndpoint.toJSON(message.serviceEndpoint)
+        : undefined);
     obj.metadata = {};
     if (message.metadata) {
       Object.entries(message.metadata).forEach(([k, v]) => {
@@ -992,15 +1064,17 @@ export const Service = {
     if (object.type !== undefined && object.type !== null) {
       message.type = object.type;
     } else {
-      message.type = "";
+      message.type = 0;
     }
     if (
       object.serviceEndpoint !== undefined &&
       object.serviceEndpoint !== null
     ) {
-      message.serviceEndpoint = object.serviceEndpoint;
+      message.serviceEndpoint = ServiceEndpoint.fromPartial(
+        object.serviceEndpoint
+      );
     } else {
-      message.serviceEndpoint = "";
+      message.serviceEndpoint = undefined;
     }
     if (object.metadata !== undefined && object.metadata !== null) {
       Object.entries(object.metadata).forEach(([key, value]) => {
@@ -1085,6 +1159,124 @@ export const Service_MetadataEntry = {
       message.value = object.value;
     } else {
       message.value = "";
+    }
+    return message;
+  },
+};
+
+const baseServiceEndpoint: object = {
+  transportType: "",
+  network: "",
+  supportedProtocols: 0,
+};
+
+export const ServiceEndpoint = {
+  encode(message: ServiceEndpoint, writer: Writer = Writer.create()): Writer {
+    if (message.transportType !== "") {
+      writer.uint32(10).string(message.transportType);
+    }
+    if (message.network !== "") {
+      writer.uint32(18).string(message.network);
+    }
+    writer.uint32(26).fork();
+    for (const v of message.supportedProtocols) {
+      writer.int32(v);
+    }
+    writer.ldelim();
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): ServiceEndpoint {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseServiceEndpoint } as ServiceEndpoint;
+    message.supportedProtocols = [];
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.transportType = reader.string();
+          break;
+        case 2:
+          message.network = reader.string();
+          break;
+        case 3:
+          if ((tag & 7) === 2) {
+            const end2 = reader.uint32() + reader.pos;
+            while (reader.pos < end2) {
+              message.supportedProtocols.push(reader.int32() as any);
+            }
+          } else {
+            message.supportedProtocols.push(reader.int32() as any);
+          }
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ServiceEndpoint {
+    const message = { ...baseServiceEndpoint } as ServiceEndpoint;
+    message.supportedProtocols = [];
+    if (object.transportType !== undefined && object.transportType !== null) {
+      message.transportType = String(object.transportType);
+    } else {
+      message.transportType = "";
+    }
+    if (object.network !== undefined && object.network !== null) {
+      message.network = String(object.network);
+    } else {
+      message.network = "";
+    }
+    if (
+      object.supportedProtocols !== undefined &&
+      object.supportedProtocols !== null
+    ) {
+      for (const e of object.supportedProtocols) {
+        message.supportedProtocols.push(serviceProtocolFromJSON(e));
+      }
+    }
+    return message;
+  },
+
+  toJSON(message: ServiceEndpoint): unknown {
+    const obj: any = {};
+    message.transportType !== undefined &&
+      (obj.transportType = message.transportType);
+    message.network !== undefined && (obj.network = message.network);
+    if (message.supportedProtocols) {
+      obj.supportedProtocols = message.supportedProtocols.map((e) =>
+        serviceProtocolToJSON(e)
+      );
+    } else {
+      obj.supportedProtocols = [];
+    }
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<ServiceEndpoint>): ServiceEndpoint {
+    const message = { ...baseServiceEndpoint } as ServiceEndpoint;
+    message.supportedProtocols = [];
+    if (object.transportType !== undefined && object.transportType !== null) {
+      message.transportType = object.transportType;
+    } else {
+      message.transportType = "";
+    }
+    if (object.network !== undefined && object.network !== null) {
+      message.network = object.network;
+    } else {
+      message.network = "";
+    }
+    if (
+      object.supportedProtocols !== undefined &&
+      object.supportedProtocols !== null
+    ) {
+      for (const e of object.supportedProtocols) {
+        message.supportedProtocols.push(e);
+      }
     }
     return message;
   },

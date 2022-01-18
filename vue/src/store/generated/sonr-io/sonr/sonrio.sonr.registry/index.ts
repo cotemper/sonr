@@ -5,11 +5,12 @@ import { SpVuexError } from '@starport/vuex'
 import { Did } from "./module/types/registry/did"
 import { DidDocument } from "./module/types/registry/did"
 import { Service } from "./module/types/registry/did"
+import { ServiceEndpoint } from "./module/types/registry/did"
 import { VerificationMethod } from "./module/types/registry/did"
 import { Params } from "./module/types/registry/params"
 
 
-export { Did, DidDocument, Service, VerificationMethod, Params };
+export { Did, DidDocument, Service, ServiceEndpoint, VerificationMethod, Params };
 
 async function initTxClient(vuexGetters) {
 	return await txClient(vuexGetters['common/wallet/signer'], {
@@ -53,6 +54,7 @@ const getDefaultState = () => {
 						Did: getStructure(Did.fromPartial({})),
 						DidDocument: getStructure(DidDocument.fromPartial({})),
 						Service: getStructure(Service.fromPartial({})),
+						ServiceEndpoint: getStructure(ServiceEndpoint.fromPartial({})),
 						VerificationMethod: getStructure(VerificationMethod.fromPartial({})),
 						Params: getStructure(Params.fromPartial({})),
 						

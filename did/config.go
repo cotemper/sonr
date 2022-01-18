@@ -14,7 +14,7 @@ type Option = v1.Option
 
 type Service = v1.Service
 
-type ServiceModule = v1.ServiceModule
+type ServiceProtocol = v1.ServiceProtocol
 
 type VerificationMethod = v1.VerificationMethod
 

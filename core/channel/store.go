@@ -29,7 +29,7 @@ func DeleteStoreKey(s *v1.ChannelStore, key string, b *channel) error {
 	}
 
 	// Check if the entry is owned by this node
-	if entry.Owner != b.n.Did().ToProto() {
+	if entry.Owner.String() != b.n.Did().ToString() {
 		return ErrNotOwner
 	}
 

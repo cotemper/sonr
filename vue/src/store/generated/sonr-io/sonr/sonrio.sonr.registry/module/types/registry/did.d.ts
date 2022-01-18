@@ -14,22 +14,36 @@ export declare enum NetworkType {
 }
 export declare function networkTypeFromJSON(object: any): NetworkType;
 export declare function networkTypeToJSON(object: NetworkType): string;
-/** ServiceModule are additional modules that can be installed on custom services on the Sonr network. */
-export declare enum ServiceModule {
-    /** SERVICE_MODULE_UNSPECIFIED - SERVICE_MODULE_UNSPECIFIED is the default value. */
-    SERVICE_MODULE_UNSPECIFIED = 0,
-    /** SERVICE_MODULE_BUCKETS - SERVICE_MODULE_BUCKETS is the module that provides the ability to store and retrieve data. */
-    SERVICE_MODULE_BUCKETS = 1,
-    /** SERVICE_MODULE_CHANNEL - SERVICE_MODULE_CHANNEL is the module that provides the ability to communicate with other services. */
-    SERVICE_MODULE_CHANNEL = 2,
-    /** SERVICE_MODULE_OBJECTS - SERVICE_MODULE_OBJECTS is the module that provides the ability to create new schemas for data on the network. */
-    SERVICE_MODULE_OBJECTS = 3,
-    /** SERVICE_MODULE_FUNCTIONS - SERVICE_MODULE_FUNCTIONS is the module that provides the ability to create new functions for data on the network. */
-    SERVICE_MODULE_FUNCTIONS = 4,
+/** ServiceProtocol are core modules that can be installed on custom services on the Sonr network. */
+export declare enum ServiceProtocol {
+    /** SERVICE_PROTOCOL_UNSPECIFIED - SERVICE_PROTOCOL_UNSPECIFIED is the default value. */
+    SERVICE_PROTOCOL_UNSPECIFIED = 0,
+    /** SERVICE_PROTOCOL_BUCKETS - SERVICE_PROTOCOL_BUCKETS is the module that provides the ability to store and retrieve data. */
+    SERVICE_PROTOCOL_BUCKETS = 1,
+    /** SERVICE_PROTOCOL_CHANNEL - SERVICE_PROTOCOL_CHANNEL is the module that provides the ability to communicate with other services. */
+    SERVICE_PROTOCOL_CHANNEL = 2,
+    /** SERVICE_PROTOCOL_OBJECTS - SERVICE_PROTOCOL_OBJECTS is the module that provides the ability to create new schemas for data on the network. */
+    SERVICE_PROTOCOL_OBJECTS = 3,
+    /** SERVICE_PROTOCOL_FUNCTIONS - SERVICE_PROTOCOL_FUNCTIONS is the module that provides the ability to create new functions for data on the network. */
+    SERVICE_PROTOCOL_FUNCTIONS = 4,
     UNRECOGNIZED = -1
 }
-export declare function serviceModuleFromJSON(object: any): ServiceModule;
-export declare function serviceModuleToJSON(object: ServiceModule): string;
+export declare function serviceProtocolFromJSON(object: any): ServiceProtocol;
+export declare function serviceProtocolToJSON(object: ServiceProtocol): string;
+/** ServiceType is the type of service that is being registered. */
+export declare enum ServiceType {
+    /** SERVICE_TYPE_UNSPECIFIED - SERVICE_TYPE_UNSPECIFIED is the default value. */
+    SERVICE_TYPE_UNSPECIFIED = 0,
+    /** SERVICE_TYPE_DID_COMM_MESSAGING - SERVICE_TYPE_APPLICATION is the type of service that is a DApp. */
+    SERVICE_TYPE_DID_COMM_MESSAGING = 1,
+    /** SERVICE_TYPE_LINKED_DOMAINS - SERVICE_TYPE_SERVICE is the type of service that is a service. */
+    SERVICE_TYPE_LINKED_DOMAINS = 2,
+    /** SERVICE_TYPE_SONR - SERVICE_TYPE_SONR is the type of service that is a DApp. */
+    SERVICE_TYPE_SONR = 3,
+    UNRECOGNIZED = -1
+}
+export declare function serviceTypeFromJSON(object: any): ServiceType;
+export declare function serviceTypeToJSON(object: ServiceType): string;
 /**
  * Did represents a string that has been parsed and validated as a DID. The parts are stored
  * in the individual fields.
@@ -86,9 +100,9 @@ export interface Service {
     /** ID is the DID of the service. */
     id: string;
     /** Type is the type of the service. */
-    type: string;
+    type: ServiceType;
     /** ServiceEndpoint is the endpoint of the service. */
-    serviceEndpoint: string;
+    serviceEndpoint: ServiceEndpoint | undefined;
     /** Metadata is the metadata of the service. */
     metadata: {
         [key: string]: string;
@@ -97,6 +111,18 @@ export interface Service {
 export interface Service_MetadataEntry {
     key: string;
     value: string;
+}
+/** ServiceEndpoint is the endpoint of the service. */
+export interface ServiceEndpoint {
+    /** TransportType is the type of transport used to connect to the service. */
+    transportType: string;
+    /** Network is the network the service is on. */
+    network: string;
+    /**
+     * SupportedProtocols is the list of protocols supported by the service.
+     * (e.g. "channels", "buckets", "objects", "storage")
+     */
+    supportedProtocols: ServiceProtocol[];
 }
 /** VerificationMethod is a method that can be used to verify the DID. */
 export interface VerificationMethod {
@@ -168,6 +194,13 @@ export declare const Service_MetadataEntry: {
     fromJSON(object: any): Service_MetadataEntry;
     toJSON(message: Service_MetadataEntry): unknown;
     fromPartial(object: DeepPartial<Service_MetadataEntry>): Service_MetadataEntry;
+};
+export declare const ServiceEndpoint: {
+    encode(message: ServiceEndpoint, writer?: Writer): Writer;
+    decode(input: Reader | Uint8Array, length?: number): ServiceEndpoint;
+    fromJSON(object: any): ServiceEndpoint;
+    toJSON(message: ServiceEndpoint): unknown;
+    fromPartial(object: DeepPartial<ServiceEndpoint>): ServiceEndpoint;
 };
 export declare const VerificationMethod: {
     encode(message: VerificationMethod, writer?: Writer): Writer;

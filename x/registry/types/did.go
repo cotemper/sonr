@@ -173,28 +173,28 @@ func (nt NetworkType) ToString() string {
 }
 
 // FindNetworkType returns the network type of a string
-func FindModuleType(netStr string) ServiceModule {
+func FindModuleType(netStr string) ServiceProtocol {
 	switch netStr {
 	case "buckets":
-		return ServiceModule_SERVICE_MODULE_BUCKETS
+		return ServiceProtocol_SERVICE_PROTOCOL_BUCKETS
 	case "channel":
-		return ServiceModule_SERVICE_MODULE_CHANNEL
+		return ServiceProtocol_SERVICE_PROTOCOL_CHANNEL
 	case "objects":
-		return ServiceModule_SERVICE_MODULE_OBJECTS
+		return ServiceProtocol_SERVICE_PROTOCOL_OBJECTS
 	case "functions":
-		return ServiceModule_SERVICE_MODULE_FUNCTIONS
+		return ServiceProtocol_SERVICE_PROTOCOL_FUNCTIONS
 	default:
-		return ServiceModule_SERVICE_MODULE_UNSPECIFIED
+		return ServiceProtocol_SERVICE_PROTOCOL_UNSPECIFIED
 	}
 }
 
 // ToString returns a string representation of the DID
-func (st ServiceModule) ToString() string {
+func (st ServiceProtocol) ToString() string {
 	// Convert to string
 	rawStr := st.String()
 	parts := strings.Split(rawStr, "_")
 	module := parts[len(parts)-1]
-	if st == ServiceModule_SERVICE_MODULE_UNSPECIFIED {
+	if st == ServiceProtocol_SERVICE_PROTOCOL_UNSPECIFIED {
 		return "0/"
 	}
 
@@ -276,7 +276,7 @@ func ContainsModule(didUrl string) bool {
 	// Check if Network is in the DID string
 	if len(parts) > 2 {
 		t := FindModuleType(parts[2])
-		if t == ServiceModule_SERVICE_MODULE_UNSPECIFIED {
+		if t == ServiceProtocol_SERVICE_PROTOCOL_UNSPECIFIED {
 			return false
 		}
 		return true

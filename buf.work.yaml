@@ -1,0 +1,7 @@
+version: v1
+directories:
+  - proto
+  - third_party/proto/common
+  - third_party/proto/core
+  - third_party/proto/highway
+  - third_party/proto/motor

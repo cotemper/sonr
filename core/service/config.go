@@ -3,7 +3,7 @@ package service
 import (
 	object "github.com/sonr-io/sonr/core/object/v1"
 	v1 "github.com/sonr-io/sonr/core/service/v1"
-	did "github.com/sonr-io/sonr/did/v1"
+	did "github.com/sonr-io/sonr/did"
 )
 
 // Option is a function that can be used to configure a ServiceConfig.

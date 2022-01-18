@@ -85,31 +85,59 @@ message Service {
   string id = 1;
 
   // Type is the type of the service.
-  string type = 2;
+  ServiceType type = 2;
 
   // ServiceEndpoint is the endpoint of the service.
-  string service_endpoint = 3;
+  ServiceEndpoint service_endpoint = 3;
 
   // Metadata is the metadata of the service.
   map<string, string> metadata = 4; // optional
 }
 
-// ServiceModule are additional modules that can be installed on custom services on the Sonr network.
-enum ServiceModule {
-  // SERVICE_MODULE_UNSPECIFIED is the default value.
-  SERVICE_MODULE_UNSPECIFIED = 0;
+// ServiceEndpoint is the endpoint of the service.
+message ServiceEndpoint {
+  // TransportType is the type of transport used to connect to the service.
+  string transport_type = 1;
 
-  // SERVICE_MODULE_BUCKETS is the module that provides the ability to store and retrieve data.
-  SERVICE_MODULE_BUCKETS = 1;
+  // Network is the network the service is on.
+  string network = 2;
 
-  // SERVICE_MODULE_CHANNEL is the module that provides the ability to communicate with other services.
-  SERVICE_MODULE_CHANNEL = 2;
+  // SupportedProtocols is the list of protocols supported by the service.
+  // (e.g. "channels", "buckets", "objects", "storage")
+  repeated ServiceProtocol supported_protocols = 3;
+}
 
-  // SERVICE_MODULE_OBJECTS is the module that provides the ability to create new schemas for data on the network.
-  SERVICE_MODULE_OBJECTS = 3;
+// ServiceProtocol are core modules that can be installed on custom services on the Sonr network.
+enum ServiceProtocol {
+  // SERVICE_PROTOCOL_UNSPECIFIED is the default value.
+  SERVICE_PROTOCOL_UNSPECIFIED = 0;
 
-  // SERVICE_MODULE_FUNCTIONS is the module that provides the ability to create new functions for data on the network.
-  SERVICE_MODULE_FUNCTIONS = 4;
+  // SERVICE_PROTOCOL_BUCKETS is the module that provides the ability to store and retrieve data.
+  SERVICE_PROTOCOL_BUCKETS = 1;
+
+  // SERVICE_PROTOCOL_CHANNEL is the module that provides the ability to communicate with other services.
+  SERVICE_PROTOCOL_CHANNEL = 2;
+
+  // SERVICE_PROTOCOL_OBJECTS is the module that provides the ability to create new schemas for data on the network.
+  SERVICE_PROTOCOL_OBJECTS = 3;
+
+  // SERVICE_PROTOCOL_FUNCTIONS is the module that provides the ability to create new functions for data on the network.
+  SERVICE_PROTOCOL_FUNCTIONS = 4;
+}
+
+// ServiceType is the type of service that is being registered.
+enum ServiceType {
+  // SERVICE_TYPE_UNSPECIFIED is the default value.
+  SERVICE_TYPE_UNSPECIFIED = 0;
+
+  // SERVICE_TYPE_APPLICATION is the type of service that is a DApp.
+  SERVICE_TYPE_DID_COMM_MESSAGING = 1;
+
+  // SERVICE_TYPE_SERVICE is the type of service that is a service.
+  SERVICE_TYPE_LINKED_DOMAINS = 2;
+
+  // SERVICE_TYPE_SONR is the type of service that is a DApp.
+  SERVICE_TYPE_SONR = 3;
 }
 
 // VerificationMethod is a method that can be used to verify the DID.
