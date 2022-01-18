@@ -4,14 +4,14 @@ import { StdFee } from "@cosmjs/launchpad";
 import { SigningStargateClient } from "@cosmjs/stargate";
 import { Registry, OfflineSigner, EncodeObject, DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
 import { Api } from "./rest";
-import { MsgCreateAccount } from "./types/registry/tx";
 import { MsgRegisterName } from "./types/registry/tx";
+import { MsgCreateAccount } from "./types/registry/tx";
 import { MsgRegisterService } from "./types/registry/tx";
 
 
 const types = [
-  ["/sonrio.sonr.registry.MsgCreateAccount", MsgCreateAccount],
   ["/sonrio.sonr.registry.MsgRegisterName", MsgRegisterName],
+  ["/sonrio.sonr.registry.MsgCreateAccount", MsgCreateAccount],
   ["/sonrio.sonr.registry.MsgRegisterService", MsgRegisterService],
   
 ];
@@ -45,8 +45,8 @@ const txClient = async (wallet: OfflineSigner, { addr: addr }: TxClientOptions =
 
   return {
     signAndBroadcast: (msgs: EncodeObject[], { fee, memo }: SignAndBroadcastOptions = {fee: defaultFee, memo: ""}) => client.signAndBroadcast(address, msgs, fee,memo),
-    msgCreateAccount: (data: MsgCreateAccount): EncodeObject => ({ typeUrl: "/sonrio.sonr.registry.MsgCreateAccount", value: MsgCreateAccount.fromPartial( data ) }),
     msgRegisterName: (data: MsgRegisterName): EncodeObject => ({ typeUrl: "/sonrio.sonr.registry.MsgRegisterName", value: MsgRegisterName.fromPartial( data ) }),
+    msgCreateAccount: (data: MsgCreateAccount): EncodeObject => ({ typeUrl: "/sonrio.sonr.registry.MsgCreateAccount", value: MsgCreateAccount.fromPartial( data ) }),
     msgRegisterService: (data: MsgRegisterService): EncodeObject => ({ typeUrl: "/sonrio.sonr.registry.MsgRegisterService", value: MsgRegisterService.fromPartial( data ) }),
     
   };
