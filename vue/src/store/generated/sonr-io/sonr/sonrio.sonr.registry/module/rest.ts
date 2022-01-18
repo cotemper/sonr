@@ -13,11 +13,60 @@ export interface ProtobufAny {
   "@type"?: string;
 }
 
-export type RegistryMsgCreateAccountResponse = object;
+/**
+* Did represents a string that has been parsed and validated as a DID. The parts are stored
+in the individual fields.
+*/
+export interface RegistryDid {
+  /** Method is the method used to create the DID. For the Sonr network it is "sonr". */
+  method?: string;
 
-export type RegistryMsgRegisterNameResponse = object;
+  /** Network is the network the DID is on. For testnet it is "testnet". i.e "did:sonr:testnet:". */
+  network?: string;
+  id?: string;
 
-export type RegistryMsgRegisterServiceResponse = object;
+  /** Paths is a list of paths that the DID is valid for. This is used to identify the Service. */
+  paths?: string[];
+
+  /** Query is the query string that was used to create the DID. This is followed by a '?'. */
+  query?: string;
+
+  /** Fragment is the fragment string that was used to create the DID. This is followed by a '#'. */
+  fragment?: string;
+}
+
+export interface RegistryMsgCreateAccountResponse {
+  /** @format int32 */
+  code?: number;
+
+  /**
+   * Did represents a string that has been parsed and validated as a DID. The parts are stored
+   * in the individual fields.
+   */
+  did?: RegistryDid;
+}
+
+export interface RegistryMsgRegisterNameResponse {
+  /** @format int32 */
+  code?: number;
+
+  /**
+   * Did represents a string that has been parsed and validated as a DID. The parts are stored
+   * in the individual fields.
+   */
+  did?: RegistryDid;
+}
+
+export interface RegistryMsgRegisterServiceResponse {
+  /** @format int32 */
+  code?: number;
+
+  /**
+   * Did represents a string that has been parsed and validated as a DID. The parts are stored
+   * in the individual fields.
+   */
+  did?: RegistryDid;
+}
 
 /**
  * Params defines the parameters for the module.
@@ -231,7 +280,7 @@ export class HttpClient<SecurityDataType = unknown> {
 }
 
 /**
- * @title registry/genesis.proto
+ * @title registry/did.proto
  * @version version not set
  */
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {

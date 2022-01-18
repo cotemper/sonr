@@ -3,7 +3,7 @@ package did
 import (
 	"strings"
 
-	v1 "github.com/sonr-io/sonr/did/v1"
+	v1 "github.com/sonr-io/sonr/x/registry/types"
 )
 
 type Did = v1.Did

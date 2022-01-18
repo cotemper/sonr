@@ -2,10 +2,14 @@ import { txClient, queryClient, MissingWalletError , registry} from './module'
 // @ts-ignore
 import { SpVuexError } from '@starport/vuex'
 
+import { Did } from "./module/types/registry/did"
+import { DidDocument } from "./module/types/registry/did"
+import { Service } from "./module/types/registry/did"
+import { VerificationMethod } from "./module/types/registry/did"
 import { Params } from "./module/types/registry/params"
 
 
-export { Params };
+export { Did, DidDocument, Service, VerificationMethod, Params };
 
 async function initTxClient(vuexGetters) {
 	return await txClient(vuexGetters['common/wallet/signer'], {
@@ -46,6 +50,10 @@ const getDefaultState = () => {
 				Params: {},
 				
 				_Structure: {
+						Did: getStructure(Did.fromPartial({})),
+						DidDocument: getStructure(DidDocument.fromPartial({})),
+						Service: getStructure(Service.fromPartial({})),
+						VerificationMethod: getStructure(VerificationMethod.fromPartial({})),
 						Params: getStructure(Params.fromPartial({})),
 						
 		},
@@ -137,6 +145,21 @@ export default {
 		},
 		
 		
+		async sendMsgCreateAccount({ rootGetters }, { value, fee = [], memo = '' }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgCreateAccount(value)
+				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
+	gas: "200000" }, memo})
+				return result
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new SpVuexError('TxClient:MsgCreateAccount:Init', 'Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new SpVuexError('TxClient:MsgCreateAccount:Send', 'Could not broadcast Tx: '+ e.message)
+				}
+			}
+		},
 		async sendMsgRegisterName({ rootGetters }, { value, fee = [], memo = '' }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
@@ -167,22 +190,21 @@ export default {
 				}
 			}
 		},
-		async sendMsgCreateAccount({ rootGetters }, { value, fee = [], memo = '' }) {
+		
+		async MsgCreateAccount({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
 				const msg = await txClient.msgCreateAccount(value)
-				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
-	gas: "200000" }, memo})
-				return result
+				return msg
 			} catch (e) {
 				if (e == MissingWalletError) {
 					throw new SpVuexError('TxClient:MsgCreateAccount:Init', 'Could not initialize signing client. Wallet is required.')
 				}else{
-					throw new SpVuexError('TxClient:MsgCreateAccount:Send', 'Could not broadcast Tx: '+ e.message)
+					throw new SpVuexError('TxClient:MsgCreateAccount:Create', 'Could not create message: ' + e.message)
+					
 				}
 			}
 		},
-		
 		async MsgRegisterName({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
@@ -207,20 +229,6 @@ export default {
 					throw new SpVuexError('TxClient:MsgRegisterService:Init', 'Could not initialize signing client. Wallet is required.')
 				}else{
 					throw new SpVuexError('TxClient:MsgRegisterService:Create', 'Could not create message: ' + e.message)
-					
-				}
-			}
-		},
-		async MsgCreateAccount({ rootGetters }, { value }) {
-			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgCreateAccount(value)
-				return msg
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new SpVuexError('TxClient:MsgCreateAccount:Init', 'Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new SpVuexError('TxClient:MsgCreateAccount:Create', 'Could not create message: ' + e.message)
 					
 				}
 			}

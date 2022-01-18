@@ -589,7 +589,7 @@
       "type": "object",
       "properties": {
         "did": {
-          "$ref": "#/definitions/v1Did",
+          "type": "string",
           "description": "Did is the identifier of the object."
         },
         "service": {
@@ -625,7 +625,7 @@
           "title": "Type is the type of the field"
         },
         "did": {
-          "$ref": "#/definitions/v1Did",
+          "type": "string",
           "description": "Did is the identifier of the field."
         },
         "stringValue": {
@@ -660,7 +660,7 @@
           "title": "Blob is the value of the field"
         },
         "referenceValue": {
-          "$ref": "#/definitions/v1Did",
+          "type": "string",
           "title": "Reference is the value of the field"
         },
         "ethValue": {
@@ -690,7 +690,7 @@
           "title": "Type is the type of the field"
         },
         "did": {
-          "$ref": "#/definitions/v1Did",
+          "type": "string",
           "description": "Did is the identifier of the field."
         },
         "items": {
@@ -715,7 +715,7 @@
           "title": "Type is the type of the field"
         },
         "did": {
-          "$ref": "#/definitions/v1Did",
+          "type": "string",
           "description": "Did is the identifier of the field."
         },
         "latitude": {

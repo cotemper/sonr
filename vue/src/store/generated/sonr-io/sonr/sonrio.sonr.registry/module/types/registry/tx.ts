@@ -1,5 +1,6 @@
 /* eslint-disable */
 import { Reader, Writer } from "protobufjs/minimal";
+import { Did } from "../registry/did";
 
 export const protobufPackage = "sonrio.sonr.registry";
 
@@ -9,7 +10,10 @@ export interface MsgRegisterName {
   fingerprint: string;
 }
 
-export interface MsgRegisterNameResponse {}
+export interface MsgRegisterNameResponse {
+  code: number;
+  did: Did | undefined;
+}
 
 export interface MsgRegisterService {
   creator: string;
@@ -17,7 +21,10 @@ export interface MsgRegisterService {
   publicKey: string;
 }
 
-export interface MsgRegisterServiceResponse {}
+export interface MsgRegisterServiceResponse {
+  code: number;
+  did: Did | undefined;
+}
 
 export interface MsgCreateAccount {
   creator: string;
@@ -31,7 +38,10 @@ export interface MsgCreateAccount {
   metadata: string;
 }
 
-export interface MsgCreateAccountResponse {}
+export interface MsgCreateAccountResponse {
+  code: number;
+  did: Did | undefined;
+}
 
 const baseMsgRegisterName: object = { creator: "", name: "", fingerprint: "" };
 
@@ -123,10 +133,19 @@ export const MsgRegisterName = {
   },
 };
 
-const baseMsgRegisterNameResponse: object = {};
+const baseMsgRegisterNameResponse: object = { code: 0 };
 
 export const MsgRegisterNameResponse = {
-  encode(_: MsgRegisterNameResponse, writer: Writer = Writer.create()): Writer {
+  encode(
+    message: MsgRegisterNameResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.code !== 0) {
+      writer.uint32(8).int32(message.code);
+    }
+    if (message.did !== undefined) {
+      Did.encode(message.did, writer.uint32(18).fork()).ldelim();
+    }
     return writer;
   },
 
@@ -139,6 +158,12 @@ export const MsgRegisterNameResponse = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1:
+          message.code = reader.int32();
+          break;
+        case 2:
+          message.did = Did.decode(reader, reader.uint32());
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -147,24 +172,47 @@ export const MsgRegisterNameResponse = {
     return message;
   },
 
-  fromJSON(_: any): MsgRegisterNameResponse {
+  fromJSON(object: any): MsgRegisterNameResponse {
     const message = {
       ...baseMsgRegisterNameResponse,
     } as MsgRegisterNameResponse;
+    if (object.code !== undefined && object.code !== null) {
+      message.code = Number(object.code);
+    } else {
+      message.code = 0;
+    }
+    if (object.did !== undefined && object.did !== null) {
+      message.did = Did.fromJSON(object.did);
+    } else {
+      message.did = undefined;
+    }
     return message;
   },
 
-  toJSON(_: MsgRegisterNameResponse): unknown {
+  toJSON(message: MsgRegisterNameResponse): unknown {
     const obj: any = {};
+    message.code !== undefined && (obj.code = message.code);
+    message.did !== undefined &&
+      (obj.did = message.did ? Did.toJSON(message.did) : undefined);
     return obj;
   },
 
   fromPartial(
-    _: DeepPartial<MsgRegisterNameResponse>
+    object: DeepPartial<MsgRegisterNameResponse>
   ): MsgRegisterNameResponse {
     const message = {
       ...baseMsgRegisterNameResponse,
     } as MsgRegisterNameResponse;
+    if (object.code !== undefined && object.code !== null) {
+      message.code = object.code;
+    } else {
+      message.code = 0;
+    }
+    if (object.did !== undefined && object.did !== null) {
+      message.did = Did.fromPartial(object.did);
+    } else {
+      message.did = undefined;
+    }
     return message;
   },
 };
@@ -266,13 +314,19 @@ export const MsgRegisterService = {
   },
 };
 
-const baseMsgRegisterServiceResponse: object = {};
+const baseMsgRegisterServiceResponse: object = { code: 0 };
 
 export const MsgRegisterServiceResponse = {
   encode(
-    _: MsgRegisterServiceResponse,
+    message: MsgRegisterServiceResponse,
     writer: Writer = Writer.create()
   ): Writer {
+    if (message.code !== 0) {
+      writer.uint32(8).int32(message.code);
+    }
+    if (message.did !== undefined) {
+      Did.encode(message.did, writer.uint32(18).fork()).ldelim();
+    }
     return writer;
   },
 
@@ -288,6 +342,12 @@ export const MsgRegisterServiceResponse = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1:
+          message.code = reader.int32();
+          break;
+        case 2:
+          message.did = Did.decode(reader, reader.uint32());
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -296,24 +356,47 @@ export const MsgRegisterServiceResponse = {
     return message;
   },
 
-  fromJSON(_: any): MsgRegisterServiceResponse {
+  fromJSON(object: any): MsgRegisterServiceResponse {
     const message = {
       ...baseMsgRegisterServiceResponse,
     } as MsgRegisterServiceResponse;
+    if (object.code !== undefined && object.code !== null) {
+      message.code = Number(object.code);
+    } else {
+      message.code = 0;
+    }
+    if (object.did !== undefined && object.did !== null) {
+      message.did = Did.fromJSON(object.did);
+    } else {
+      message.did = undefined;
+    }
     return message;
   },
 
-  toJSON(_: MsgRegisterServiceResponse): unknown {
+  toJSON(message: MsgRegisterServiceResponse): unknown {
     const obj: any = {};
+    message.code !== undefined && (obj.code = message.code);
+    message.did !== undefined &&
+      (obj.did = message.did ? Did.toJSON(message.did) : undefined);
     return obj;
   },
 
   fromPartial(
-    _: DeepPartial<MsgRegisterServiceResponse>
+    object: DeepPartial<MsgRegisterServiceResponse>
   ): MsgRegisterServiceResponse {
     const message = {
       ...baseMsgRegisterServiceResponse,
     } as MsgRegisterServiceResponse;
+    if (object.code !== undefined && object.code !== null) {
+      message.code = object.code;
+    } else {
+      message.code = 0;
+    }
+    if (object.did !== undefined && object.did !== null) {
+      message.did = Did.fromPartial(object.did);
+    } else {
+      message.did = undefined;
+    }
     return message;
   },
 };
@@ -520,13 +603,19 @@ export const MsgCreateAccount = {
   },
 };
 
-const baseMsgCreateAccountResponse: object = {};
+const baseMsgCreateAccountResponse: object = { code: 0 };
 
 export const MsgCreateAccountResponse = {
   encode(
-    _: MsgCreateAccountResponse,
+    message: MsgCreateAccountResponse,
     writer: Writer = Writer.create()
   ): Writer {
+    if (message.code !== 0) {
+      writer.uint32(8).int32(message.code);
+    }
+    if (message.did !== undefined) {
+      Did.encode(message.did, writer.uint32(18).fork()).ldelim();
+    }
     return writer;
   },
 
@@ -542,6 +631,12 @@ export const MsgCreateAccountResponse = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1:
+          message.code = reader.int32();
+          break;
+        case 2:
+          message.did = Did.decode(reader, reader.uint32());
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -550,24 +645,47 @@ export const MsgCreateAccountResponse = {
     return message;
   },
 
-  fromJSON(_: any): MsgCreateAccountResponse {
+  fromJSON(object: any): MsgCreateAccountResponse {
     const message = {
       ...baseMsgCreateAccountResponse,
     } as MsgCreateAccountResponse;
+    if (object.code !== undefined && object.code !== null) {
+      message.code = Number(object.code);
+    } else {
+      message.code = 0;
+    }
+    if (object.did !== undefined && object.did !== null) {
+      message.did = Did.fromJSON(object.did);
+    } else {
+      message.did = undefined;
+    }
     return message;
   },
 
-  toJSON(_: MsgCreateAccountResponse): unknown {
+  toJSON(message: MsgCreateAccountResponse): unknown {
     const obj: any = {};
+    message.code !== undefined && (obj.code = message.code);
+    message.did !== undefined &&
+      (obj.did = message.did ? Did.toJSON(message.did) : undefined);
     return obj;
   },
 
   fromPartial(
-    _: DeepPartial<MsgCreateAccountResponse>
+    object: DeepPartial<MsgCreateAccountResponse>
   ): MsgCreateAccountResponse {
     const message = {
       ...baseMsgCreateAccountResponse,
     } as MsgCreateAccountResponse;
+    if (object.code !== undefined && object.code !== null) {
+      message.code = object.code;
+    } else {
+      message.code = 0;
+    }
+    if (object.did !== undefined && object.did !== null) {
+      message.did = Did.fromPartial(object.did);
+    } else {
+      message.did = undefined;
+    }
     return message;
   },
 };

@@ -2,7 +2,6 @@ syntax = "proto3";
 
 // Package common defines commonly used types agnostic to the node role on the Sonr network.
 package core.object.v1;
-import "did/v1/did.proto";
 import "google/protobuf/timestamp.proto";
 option go_package = "github.com/sonr-io/sonr/core/object/v1";
 
@@ -10,7 +9,7 @@ option go_package = "github.com/sonr-io/sonr/core/object/v1";
 // ObjectDoc is a document for an Object stored in the graph.
 message ObjectDoc {
     // Did is the identifier of the object.
-    did.v1.Did did = 1;
+    string did = 1;
 
     // Service is the service that created the object.
     string service = 2;
@@ -31,7 +30,7 @@ message ObjectField {
     ObjectFieldType type = 2;
 
     // Did is the identifier of the field.
-    did.v1.Did did = 3;
+    string did = 3;
 
     // Value is the value of the field
     oneof value {
@@ -57,7 +56,7 @@ message ObjectField {
       bytes blob_value = 10;
 
       // Reference is the value of the field
-      did.v1.Did reference_value = 11;
+      string reference_value = 11;
 
       // Eth Address is the value of the field
       bytes eth_value = 12;
@@ -76,7 +75,7 @@ message ObjectFieldArray {
     ObjectFieldType type = 2;
 
     // Did is the identifier of the field.
-    did.v1.Did did = 3;
+    string did = 3;
 
     // Entries are the values of the field
     repeated ObjectField items = 4;
@@ -91,7 +90,7 @@ message ObjectFieldGeopoint {
     ObjectFieldType type = 2;
 
     // Did is the identifier of the field.
-    did.v1.Did did = 3;
+    string did = 3;
 
     // Latitude is the geo-latitude of the point.
     double latitude = 4;

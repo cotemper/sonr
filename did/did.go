@@ -6,7 +6,7 @@ import (
 	crypto "github.com/libp2p/go-libp2p-core/crypto"
 	"github.com/mr-tron/base58"
 	"github.com/pkg/errors"
-	v1 "github.com/sonr-io/sonr/did/v1"
+	v1 "github.com/sonr-io/sonr/x/registry/types"
 )
 
 // DID is the interface for managing the APIv1 Did's

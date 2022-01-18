@@ -130,7 +130,7 @@ export class HttpClient {
     }
 }
 /**
- * @title registry/genesis.proto
+ * @title registry/did.proto
  * @version version not set
  */
 export class Api extends HttpClient {

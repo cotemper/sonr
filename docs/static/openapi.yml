@@ -19960,12 +19960,184 @@ definitions:
       and
 
       freezing clients
+  sonrio.sonr.registry.Did:
+    type: object
+    properties:
+      method:
+        type: string
+        description: >-
+          Method is the method used to create the DID. For the Sonr network it
+          is "sonr".
+      network:
+        type: string
+        description: >-
+          Network is the network the DID is on. For testnet it is "testnet". i.e
+          "did:sonr:testnet:".
+      id:
+        type: string
+        title: >-
+          id is the trailing identifier after the network. i.e.
+          "did:sonr:testnet:abc123"
+      paths:
+        type: array
+        items:
+          type: string
+        description: >-
+          Paths is a list of paths that the DID is valid for. This is used to
+          identify the Service.
+      query:
+        type: string
+        description: >-
+          Query is the query string that was used to create the DID. This is
+          followed by a '?'.
+      fragment:
+        type: string
+        description: >-
+          Fragment is the fragment string that was used to create the DID. This
+          is followed by a '#'.
+    description: >-
+      Did represents a string that has been parsed and validated as a DID. The
+      parts are stored
+
+      in the individual fields.
   sonrio.sonr.registry.MsgCreateAccountResponse:
     type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      did:
+        type: object
+        properties:
+          method:
+            type: string
+            description: >-
+              Method is the method used to create the DID. For the Sonr network
+              it is "sonr".
+          network:
+            type: string
+            description: >-
+              Network is the network the DID is on. For testnet it is "testnet".
+              i.e "did:sonr:testnet:".
+          id:
+            type: string
+            title: >-
+              id is the trailing identifier after the network. i.e.
+              "did:sonr:testnet:abc123"
+          paths:
+            type: array
+            items:
+              type: string
+            description: >-
+              Paths is a list of paths that the DID is valid for. This is used
+              to identify the Service.
+          query:
+            type: string
+            description: >-
+              Query is the query string that was used to create the DID. This is
+              followed by a '?'.
+          fragment:
+            type: string
+            description: >-
+              Fragment is the fragment string that was used to create the DID.
+              This is followed by a '#'.
+        description: >-
+          Did represents a string that has been parsed and validated as a DID.
+          The parts are stored
+
+          in the individual fields.
   sonrio.sonr.registry.MsgRegisterNameResponse:
     type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      did:
+        type: object
+        properties:
+          method:
+            type: string
+            description: >-
+              Method is the method used to create the DID. For the Sonr network
+              it is "sonr".
+          network:
+            type: string
+            description: >-
+              Network is the network the DID is on. For testnet it is "testnet".
+              i.e "did:sonr:testnet:".
+          id:
+            type: string
+            title: >-
+              id is the trailing identifier after the network. i.e.
+              "did:sonr:testnet:abc123"
+          paths:
+            type: array
+            items:
+              type: string
+            description: >-
+              Paths is a list of paths that the DID is valid for. This is used
+              to identify the Service.
+          query:
+            type: string
+            description: >-
+              Query is the query string that was used to create the DID. This is
+              followed by a '?'.
+          fragment:
+            type: string
+            description: >-
+              Fragment is the fragment string that was used to create the DID.
+              This is followed by a '#'.
+        description: >-
+          Did represents a string that has been parsed and validated as a DID.
+          The parts are stored
+
+          in the individual fields.
   sonrio.sonr.registry.MsgRegisterServiceResponse:
     type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      did:
+        type: object
+        properties:
+          method:
+            type: string
+            description: >-
+              Method is the method used to create the DID. For the Sonr network
+              it is "sonr".
+          network:
+            type: string
+            description: >-
+              Network is the network the DID is on. For testnet it is "testnet".
+              i.e "did:sonr:testnet:".
+          id:
+            type: string
+            title: >-
+              id is the trailing identifier after the network. i.e.
+              "did:sonr:testnet:abc123"
+          paths:
+            type: array
+            items:
+              type: string
+            description: >-
+              Paths is a list of paths that the DID is valid for. This is used
+              to identify the Service.
+          query:
+            type: string
+            description: >-
+              Query is the query string that was used to create the DID. This is
+              followed by a '?'.
+          fragment:
+            type: string
+            description: >-
+              Fragment is the fragment string that was used to create the DID.
+              This is followed by a '#'.
+        description: >-
+          Did represents a string that has been parsed and validated as a DID.
+          The parts are stored
+
+          in the individual fields.
   sonrio.sonr.registry.Params:
     type: object
     description: Params defines the parameters for the module.

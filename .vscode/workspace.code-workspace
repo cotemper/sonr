@@ -49,7 +49,6 @@
             "**pubspec.lock": true,
             "**/node_modules": true,
             "app.iml": true,
-            "types": true,
             "Contents.json": true,
             ".devcontainer": true,
             "docs": true,

@@ -2,13 +2,12 @@ syntax = "proto3";
 
 // Package Channel contains definitions for channel specific events and data.
 package core.channel.v1;
-import "did/v1/did.proto";
 option go_package = "github.com/sonr-io/sonr/core/channel/v1";
 
 // ChannelEvent is the base event type for all channel events.
 message ChannelEvent {
     // Owner is the peer that originated the event.
-    did.v1.Did owner = 1;
+    string owner = 1;
 
     // Type is the type of event being performed on a channel.
     ChannelEventType type = 2;
@@ -23,7 +22,7 @@ message ChannelEvent {
 // ChannelMessage is a message sent to a channel.
 message ChannelMessage {
     // Owner is the peer that originated the message.
-    did.v1.Did owner = 1;
+    string owner = 1;
 
     // Text is the message text.
     string text = 2; // optional
@@ -69,7 +68,7 @@ message ChannelStore {
 // ChannelStoreRecord is the data being stored in the ChannelStore.
 message ChannelStoreRecord {
     // Owner is the peer that originated the event.
-    did.v1.Did owner = 1;
+    string owner = 1;
 
     // Key is the key being modified in the Store.
     string key = 2;

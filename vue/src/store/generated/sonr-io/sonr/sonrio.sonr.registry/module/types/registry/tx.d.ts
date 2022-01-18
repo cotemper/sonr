@@ -1,4 +1,5 @@
 import { Reader, Writer } from "protobufjs/minimal";
+import { Did } from "../registry/did";
 export declare const protobufPackage = "sonrio.sonr.registry";
 export interface MsgRegisterName {
     creator: string;
@@ -6,6 +7,8 @@ export interface MsgRegisterName {
     fingerprint: string;
 }
 export interface MsgRegisterNameResponse {
+    code: number;
+    did: Did | undefined;
 }
 export interface MsgRegisterService {
     creator: string;
@@ -13,6 +16,8 @@ export interface MsgRegisterService {
     publicKey: string;
 }
 export interface MsgRegisterServiceResponse {
+    code: number;
+    did: Did | undefined;
 }
 export interface MsgCreateAccount {
     creator: string;
@@ -26,6 +31,8 @@ export interface MsgCreateAccount {
     metadata: string;
 }
 export interface MsgCreateAccountResponse {
+    code: number;
+    did: Did | undefined;
 }
 export declare const MsgRegisterName: {
     encode(message: MsgRegisterName, writer?: Writer): Writer;
@@ -35,11 +42,11 @@ export declare const MsgRegisterName: {
     fromPartial(object: DeepPartial<MsgRegisterName>): MsgRegisterName;
 };
 export declare const MsgRegisterNameResponse: {
-    encode(_: MsgRegisterNameResponse, writer?: Writer): Writer;
+    encode(message: MsgRegisterNameResponse, writer?: Writer): Writer;
     decode(input: Reader | Uint8Array, length?: number): MsgRegisterNameResponse;
-    fromJSON(_: any): MsgRegisterNameResponse;
-    toJSON(_: MsgRegisterNameResponse): unknown;
-    fromPartial(_: DeepPartial<MsgRegisterNameResponse>): MsgRegisterNameResponse;
+    fromJSON(object: any): MsgRegisterNameResponse;
+    toJSON(message: MsgRegisterNameResponse): unknown;
+    fromPartial(object: DeepPartial<MsgRegisterNameResponse>): MsgRegisterNameResponse;
 };
 export declare const MsgRegisterService: {
     encode(message: MsgRegisterService, writer?: Writer): Writer;
@@ -49,11 +56,11 @@ export declare const MsgRegisterService: {
     fromPartial(object: DeepPartial<MsgRegisterService>): MsgRegisterService;
 };
 export declare const MsgRegisterServiceResponse: {
-    encode(_: MsgRegisterServiceResponse, writer?: Writer): Writer;
+    encode(message: MsgRegisterServiceResponse, writer?: Writer): Writer;
     decode(input: Reader | Uint8Array, length?: number): MsgRegisterServiceResponse;
-    fromJSON(_: any): MsgRegisterServiceResponse;
-    toJSON(_: MsgRegisterServiceResponse): unknown;
-    fromPartial(_: DeepPartial<MsgRegisterServiceResponse>): MsgRegisterServiceResponse;
+    fromJSON(object: any): MsgRegisterServiceResponse;
+    toJSON(message: MsgRegisterServiceResponse): unknown;
+    fromPartial(object: DeepPartial<MsgRegisterServiceResponse>): MsgRegisterServiceResponse;
 };
 export declare const MsgCreateAccount: {
     encode(message: MsgCreateAccount, writer?: Writer): Writer;
@@ -63,11 +70,11 @@ export declare const MsgCreateAccount: {
     fromPartial(object: DeepPartial<MsgCreateAccount>): MsgCreateAccount;
 };
 export declare const MsgCreateAccountResponse: {
-    encode(_: MsgCreateAccountResponse, writer?: Writer): Writer;
+    encode(message: MsgCreateAccountResponse, writer?: Writer): Writer;
     decode(input: Reader | Uint8Array, length?: number): MsgCreateAccountResponse;
-    fromJSON(_: any): MsgCreateAccountResponse;
-    toJSON(_: MsgCreateAccountResponse): unknown;
-    fromPartial(_: DeepPartial<MsgCreateAccountResponse>): MsgCreateAccountResponse;
+    fromJSON(object: any): MsgCreateAccountResponse;
+    toJSON(message: MsgCreateAccountResponse): unknown;
+    fromPartial(object: DeepPartial<MsgCreateAccountResponse>): MsgCreateAccountResponse;
 };
 /** Msg defines the Msg service. */
 export interface Msg {
