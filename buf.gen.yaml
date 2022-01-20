@@ -23,3 +23,15 @@ plugins:
       - use_go_templates=true
       - allow_merge=true
       - merge_file_name=openapi.json
+
+  - name: ts
+    out: plugins/ts/src
+    strategy: all
+    path: node_modules/ts-proto/protoc-gen-ts_proto
+    opt:
+      - esModuleInterop=true
+      - stringEnums=true
+      - env=node
+      - outputServices=grpc-js
+      - useOptionals=true
+      - outputClientImpl=grpc-node
