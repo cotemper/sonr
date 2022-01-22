@@ -19,12 +19,78 @@ func TestGenesisState_Validate(t *testing.T) {
 			valid:    true,
 		},
 		{
-			desc:     "valid genesis state",
+			desc: "valid genesis state",
 			genState: &types.GenesisState{
 
+				WhoisList: []types.Whois{
+					{
+						Index: "0",
+					},
+					{
+						Index: "1",
+					},
+				},
+				WhatisList: []types.Whatis{
+					{
+						Index: "0",
+					},
+					{
+						Index: "1",
+					},
+				},
+				ThereisList: []types.Thereis{
+					{
+						Index: "0",
+					},
+					{
+						Index: "1",
+					},
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
+		},
+		{
+			desc: "duplicated whois",
+			genState: &types.GenesisState{
+				WhoisList: []types.Whois{
+					{
+						Index: "0",
+					},
+					{
+						Index: "0",
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated whatis",
+			genState: &types.GenesisState{
+				WhatisList: []types.Whatis{
+					{
+						Index: "0",
+					},
+					{
+						Index: "0",
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated thereis",
+			genState: &types.GenesisState{
+				ThereisList: []types.Thereis{
+					{
+						Index: "0",
+					},
+					{
+						Index: "0",
+					},
+				},
+			},
+			valid: false,
 		},
 		// this line is used by starport scaffolding # types/genesis/testcase
 	} {

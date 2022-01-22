@@ -3,6 +3,9 @@ package sonrio.sonr.registry;
 
 import "gogoproto/gogo.proto";
 import "registry/params.proto";
+import "registry/whois.proto";
+import "registry/whatis.proto";
+import "registry/thereis.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
 option go_package = "github.com/sonr-io/sonr/x/registry/types";
@@ -10,5 +13,8 @@ option go_package = "github.com/sonr-io/sonr/x/registry/types";
 // GenesisState defines the registry module's genesis state.
 message GenesisState {
   Params params = 1 [(gogoproto.nullable) = false];
+  repeated Whois whoisList = 2 [(gogoproto.nullable) = false];
+  repeated Whatis whatisList = 3 [(gogoproto.nullable) = false];
+  repeated Thereis thereisList = 4 [(gogoproto.nullable) = false];
   // this line is used by starport scaffolding # genesis/proto/state
 }

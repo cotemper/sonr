@@ -35,6 +35,33 @@ func NewHandler(k keeper.Keeper) sdk.Handler {
 		case *types.MsgUpdateService:
 			res, err := msgServer.UpdateService(sdk.WrapSDKContext(ctx), msg)
 			return sdk.WrapServiceResult(ctx, res, err)
+		case *types.MsgCreateWhois:
+			res, err := msgServer.CreateWhois(sdk.WrapSDKContext(ctx), msg)
+			return sdk.WrapServiceResult(ctx, res, err)
+		case *types.MsgUpdateWhois:
+			res, err := msgServer.UpdateWhois(sdk.WrapSDKContext(ctx), msg)
+			return sdk.WrapServiceResult(ctx, res, err)
+		case *types.MsgDeleteWhois:
+			res, err := msgServer.DeleteWhois(sdk.WrapSDKContext(ctx), msg)
+			return sdk.WrapServiceResult(ctx, res, err)
+		case *types.MsgCreateWhatis:
+			res, err := msgServer.CreateWhatis(sdk.WrapSDKContext(ctx), msg)
+			return sdk.WrapServiceResult(ctx, res, err)
+		case *types.MsgUpdateWhatis:
+			res, err := msgServer.UpdateWhatis(sdk.WrapSDKContext(ctx), msg)
+			return sdk.WrapServiceResult(ctx, res, err)
+		case *types.MsgDeleteWhatis:
+			res, err := msgServer.DeleteWhatis(sdk.WrapSDKContext(ctx), msg)
+			return sdk.WrapServiceResult(ctx, res, err)
+		case *types.MsgCreateThereis:
+			res, err := msgServer.CreateThereis(sdk.WrapSDKContext(ctx), msg)
+			return sdk.WrapServiceResult(ctx, res, err)
+		case *types.MsgUpdateThereis:
+			res, err := msgServer.UpdateThereis(sdk.WrapSDKContext(ctx), msg)
+			return sdk.WrapServiceResult(ctx, res, err)
+		case *types.MsgDeleteThereis:
+			res, err := msgServer.DeleteThereis(sdk.WrapSDKContext(ctx), msg)
+			return sdk.WrapServiceResult(ctx, res, err)
 			// this line is used by starport scaffolding # 1
 		default:
 			errMsg := fmt.Sprintf("unrecognized %s message type: %T", types.ModuleName, msg)

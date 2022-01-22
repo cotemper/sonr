@@ -5,6 +5,9 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "registry/params.proto";
+import "registry/whois.proto";
+import "registry/whatis.proto";
+import "registry/thereis.proto";
 // this line is used by starport scaffolding # 1
 
 option go_package = "github.com/sonr-io/sonr/x/registry/types";
@@ -15,7 +18,37 @@ service Query {
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/sonrio/sonr/registry/params";
   }
-  // this line is used by starport scaffolding # 2
+  // Queries a Whois by index.
+	rpc Whois(QueryGetWhoisRequest) returns (QueryGetWhoisResponse) {
+		option (google.api.http).get = "/sonr-io/sonr/registry/whois/{index}";
+	}
+
+	// Queries a list of Whois items.
+	rpc WhoisAll(QueryAllWhoisRequest) returns (QueryAllWhoisResponse) {
+		option (google.api.http).get = "/sonr-io/sonr/registry/whois";
+	}
+
+// Queries a Whatis by index.
+	rpc Whatis(QueryGetWhatisRequest) returns (QueryGetWhatisResponse) {
+		option (google.api.http).get = "/sonr-io/sonr/registry/whatis/{index}";
+	}
+
+	// Queries a list of Whatis items.
+	rpc WhatisAll(QueryAllWhatisRequest) returns (QueryAllWhatisResponse) {
+		option (google.api.http).get = "/sonr-io/sonr/registry/whatis";
+	}
+
+// Queries a Thereis by index.
+	rpc Thereis(QueryGetThereisRequest) returns (QueryGetThereisResponse) {
+		option (google.api.http).get = "/sonr-io/sonr/registry/thereis/{index}";
+	}
+
+	// Queries a list of Thereis items.
+	rpc ThereisAll(QueryAllThereisRequest) returns (QueryAllThereisResponse) {
+		option (google.api.http).get = "/sonr-io/sonr/registry/thereis";
+	}
+
+// this line is used by starport scaffolding # 2
 }
 
 // QueryParamsRequest is request type for the Query/Params RPC method.
@@ -25,6 +58,60 @@ message QueryParamsRequest {}
 message QueryParamsResponse {
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetWhoisRequest {
+	  string index = 1;
+
+}
+
+message QueryGetWhoisResponse {
+	Whois whois = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllWhoisRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllWhoisResponse {
+	repeated Whois whois = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetWhatisRequest {
+	  string index = 1;
+
+}
+
+message QueryGetWhatisResponse {
+	Whatis whatis = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllWhatisRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllWhatisResponse {
+	repeated Whatis whatis = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetThereisRequest {
+	  string index = 1;
+
+}
+
+message QueryGetThereisResponse {
+	Thereis thereis = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllThereisRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllThereisResponse {
+	repeated Thereis thereis = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 // this line is used by starport scaffolding # 3

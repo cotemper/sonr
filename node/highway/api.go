@@ -1,141 +1,36 @@
-package main
+package highway
 
 import (
 	"context"
-	"errors"
 	"fmt"
-	"log"
-	"net"
-	"net/http"
 
-	"github.com/kataras/golog"
-	"github.com/soheilhy/cmux"
+	"github.com/sonr-io/sonr/x/channel"
 	hw "go.buf.build/grpc/go/sonr-io/highway/v1"
 	bt "go.buf.build/grpc/go/sonr-io/sonr/bucket"
 	ct "go.buf.build/grpc/go/sonr-io/sonr/channel"
 	ot "go.buf.build/grpc/go/sonr-io/sonr/object"
 	rt "go.buf.build/grpc/go/sonr-io/sonr/registry"
-
-	"github.com/tendermint/starport/starport/pkg/cosmosclient"
-	"google.golang.org/grpc"
 )
 
-// Error Definitions
 var (
-	logger                 = golog.Default.Child("node/highway")
-	ErrEmptyQueue          = errors.New("No items in Transfer Queue.")
-	ErrInvalidQuery        = errors.New("No SName or PeerID provided.")
-	ErrMissingParam        = errors.New("Paramater is missing.")
-	ErrProtocolsNotSet     = errors.New("Node Protocol has not been initialized.")
-	ErrMethodUnimplemented = errors.New("Method is not implemented.")
+	Stub     *HighwayStub
+	IpfsPath string
+	IpfsPort int
+
+	Libp2pLowWater       int
+	Libp2pHighWater      int
+	Libp2pRendevouz      string
+	Libp2pBootstrapPeers []string
+
+	SonrAddress string
+	SonrDid     string
+	SonrPort    int
+	SonrNetwork string
 )
-
-// HighwayStub is the RPC Service for the Custodian Node.
-type HighwayStub struct {
-	hw.HighwayServiceServer
-
-	// node   *node.Highway
-	cosmos cosmosclient.Client
-
-	// Properties
-	ctx   context.Context
-	grpcS *grpc.Server
-	httpS *http.Server
-	grpcL net.Listener
-	httpL net.Listener
-
-	// Configuration
-	// ipfs *storage.IPFSService
-
-	// List of Entries
-	channels map[string]*ct.Channel
-	buckets  map[string]*bt.Bucket
-	objects  map[string]*ot.ObjectDoc
-}
-
-var Stub *HighwayStub
-
-func main() {
-	ctx := context.Background()
-	// Create the main listener.
-	l, err := net.Listen("tcp", ":26225")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	// Create a cmux.
-	m := cmux.New(l)
-
-	stub, err := NewHighwayRPC(ctx, m)
-	if err != nil {
-		panic(err)
-	}
-	Stub = stub
-}
-
-// NewHighway creates a new Highway service stub for the node.
-func NewHighwayRPC(ctx context.Context, mux cmux.CMux) (*HighwayStub, error) {
-	// First grpc, then HTTP, and otherwise Go RPC/TCP.
-	grpcL := mux.Match(cmux.HTTP2HeaderField("content-type", "application/grpc"))
-	httpL := mux.Match(cmux.HTTP1Fast())
-
-	// create an instance of cosmosclient
-	cosmos, err := cosmosclient.New(ctx)
-	if err != nil {
-		return nil, err
-	}
-
-	// Create the RPC Service
-	stub := &HighwayStub{
-		// node:       n,
-		ctx:    ctx,
-		grpcS:  grpc.NewServer(),
-		cosmos: cosmos,
-		grpcL:  grpcL,
-		httpL:  httpL,
-	}
-
-	// // Set IPFS Service
-	// stub.ipfs, err = storage.Init()
-	// if err != nil {
-	// 	return nil, err
-	// }
-	// Register the RPC Service
-
-	hw.RegisterHighwayServiceServer(stub.grpcS, stub)
-	go stub.Serve(ctx, grpcL)
-	return stub, nil
-}
-
-// Serve serves the RPC Service on the given port.
-func (s *HighwayStub) Serve(ctx context.Context, listener net.Listener) {
-	// Start HTTP server (and proxy calls to gRPC server endpoint)
-	if err := http.ListenAndServe(":8081", s.grpcS); err != nil {
-		logger.Errorf("%s - Failed to start HTTP server", err)
-	}
-
-	for {
-		// Stop Serving if context is done
-		select {
-		case <-ctx.Done():
-			// s.node.Close()
-			return
-		}
-	}
-}
 
 // AccessName accesses a name.
 func (s *HighwayStub) AccessName(ctx context.Context, req *hw.AccessNameRequest) (*hw.AccessNameResponse, error) {
 	// instantiate a query client for your `blog` blockchain
-	// queryClient := types.NewQueryClient(s.cosmos.Context)
-
-	// // query the blockchain using the client's `didAll` method to get all dids
-	// // store all dids in queryResp
-	// queryResp, err := queryClient.Dids(context.Background(), &types.QueryDidsRequest{})
-	// if err != nil {
-	// 	return nil, err
-	// }
-
 	// print response from querying all the dids
 	fmt.Print("\n\nAll Dids:\n\n")
 	//fmt.Println(queryResp)
@@ -144,27 +39,6 @@ func (s *HighwayStub) AccessName(ctx context.Context, req *hw.AccessNameRequest)
 
 // RegisterName registers a name.
 func (s *HighwayStub) RegisterName(ctx context.Context, req *rt.MsgRegisterName) (*rt.MsgRegisterNameResponse, error) {
-	// account `alice` was initialized during `starport chain serve`
-	// accountName := "alice"
-
-	// // get account from the keyring by account name and return a bech32 address
-	// address, err := s.cosmos.Address(accountName)
-	// if err != nil {
-	// 	return nil, err
-	// }
-
-	// // define a message to create a did
-	// msg := &types.MsgRegisterName{
-	// 	Creator: address.String(),
-	// }
-
-	// // broadcast a transaction from account `alice` with the message to create a did
-	// // store response in txResp
-	// txResp, err := s.cosmos.BroadcastTx(accountName, msg)
-	// if err != nil {
-	// 	return nil, err
-	// }
-
 	// print response from broadcasting a transaction
 	fmt.Print("MsgCreateDidDocument:\n\n")
 	// fmt.Println(txResp)
@@ -178,19 +52,6 @@ func (s *HighwayStub) UpdateName(ctx context.Context, req *rt.MsgUpdateName) (*r
 
 // AccessService accesses a service.
 func (s *HighwayStub) AccessService(ctx context.Context, req *hw.AccessServiceRequest) (*hw.AccessServiceResponse, error) {
-	// // instantiate a query client for your `blog` blockchain
-	// queryClient := types.NewQueryClient(s.cosmos.Context)
-
-	// // query the blockchain using the client's `didAll` method to get all dids
-	// // store all dids in queryResp
-	// queryResp, err := queryClient.Dids(context.Background(), &types.QueryDidsRequest{})
-	// if err != nil {
-	// 	return nil, err
-	// }
-
-	// // print response from querying all the dids
-	// fmt.Print("\n\nAll Dids:\n\n")
-	// fmt.Println(queryResp)
 	return nil, ErrMethodUnimplemented
 }
 
@@ -230,34 +91,16 @@ func (s *HighwayStub) UpdateService(ctx context.Context, req *rt.MsgUpdateServic
 
 // CreateChannel creates a new channel.
 func (s *HighwayStub) CreateChannel(ctx context.Context, req *ct.MsgCreateChannel) (*ct.MsgCreateChannelResponse, error) {
-	// Create DID
-	// did, err := s.node.Did().Create(did.WithFragment(req.Name))
-	// if err != nil {
-	// 	return nil, err
-	// }
-
-	// // Create the Channel
-	// ch, err := channel.New(ctx, s.node, req.GetObjectDid())
-	// if err != nil {
-	// 	return nil, err
-	// }
-
-	// Add to the list of Channels
-	// s.channels[did.ToString()] = ch
+	_, err := channel.New(ctx, s.Host, nil)
+	if err != nil {
+		return nil, err
+	}
 	return nil, ErrMethodUnimplemented
 }
 
 // ReadChannel reads a channel.
 func (s *HighwayStub) ReadChannel(ctx context.Context, req *ct.MsgReadChannel) (*ct.MsgReadChannelResponse, error) {
-	// Find channel by DID
-	// ch, ok := s.channels[req.GetDid()]
-	// if !ok {
-	// 	return nil, ErrInvalidQuery
-	// }
 
-	// Read the channel
-	// peers := ch.Read()
-	// 	logger.Debugf("Read %d peers from channel %s", len(peers), peers)
 	return &ct.MsgReadChannelResponse{
 		// Peers: peers,
 	}, nil
