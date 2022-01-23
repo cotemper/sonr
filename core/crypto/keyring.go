@@ -50,18 +50,19 @@ func setupKeyring(sname string, path string) (map[string]string, error) {
 		return nil, err
 	}
 
-	// Create default sonr keys
-	pub, _ := CreateEd25519Key()
+	// Create default sonr key
 	msig := CreateMultiSigKey()
-	Keyring.SavePubKey("device", pub, hd.Ed25519Type)
-	Keyring.SaveMultisig("provision", msig)
+	_, err = Keyring.SaveMultisig("provision", msig)
+	if err != nil {
+		return nil, err
+	}
 
 	// Add keys and see they return in alphabetical order
 	result["sName"] = sname
 	result["mnemonic"] = mnemonic
 	result["walletAddress"] = wallet.GetAddress().String()
 	result["masterPublicKey"] = wallet.GetPubKey().String()
-	result["devicePublicKey"] = pub.String()
+	//result["devicePublicKey"] = pub.String()
 	result["provisionPublicKey"] = msig.Address().String()
 	return result, nil
 }
