@@ -21,6 +21,30 @@ import { DelegationResponse } from "./module/types/cosmos/staking/v1beta1/stakin
 import { RedelegationEntryResponse } from "./module/types/cosmos/staking/v1beta1/staking";
 import { RedelegationResponse } from "./module/types/cosmos/staking/v1beta1/staking";
 import { Pool } from "./module/types/cosmos/staking/v1beta1/staking";
-export { StakeAuthorization, StakeAuthorization_Validators, LastValidatorPower, HistoricalInfo, CommissionRates, Commission, Description, Validator, ValAddresses, DVPair, DVPairs, DVVTriplet, DVVTriplets, Delegation, UnbondingDelegation, UnbondingDelegationEntry, RedelegationEntry, Redelegation, Params, DelegationResponse, RedelegationEntryResponse, RedelegationResponse, Pool };
+export {
+  StakeAuthorization,
+  StakeAuthorization_Validators,
+  LastValidatorPower,
+  HistoricalInfo,
+  CommissionRates,
+  Commission,
+  Description,
+  Validator,
+  ValAddresses,
+  DVPair,
+  DVPairs,
+  DVVTriplet,
+  DVVTriplets,
+  Delegation,
+  UnbondingDelegation,
+  UnbondingDelegationEntry,
+  RedelegationEntry,
+  Redelegation,
+  Params,
+  DelegationResponse,
+  RedelegationEntryResponse,
+  RedelegationResponse,
+  Pool,
+};
 declare const _default;
 export default _default;

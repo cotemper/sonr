@@ -9,6 +9,18 @@ import { ObjectFieldGeopoint } from "./module/types/object/object";
 import { ObjectFieldBlob } from "./module/types/object/object";
 import { ObjectFieldBlockchainAddress } from "./module/types/object/object";
 import { Params } from "./module/types/object/params";
-export { ObjectDoc, ObjectField, ObjectFieldArray, ObjectFieldText, ObjectFieldNumber, ObjectFieldBool, ObjectFieldTime, ObjectFieldGeopoint, ObjectFieldBlob, ObjectFieldBlockchainAddress, Params };
+export {
+  ObjectDoc,
+  ObjectField,
+  ObjectFieldArray,
+  ObjectFieldText,
+  ObjectFieldNumber,
+  ObjectFieldBool,
+  ObjectFieldTime,
+  ObjectFieldGeopoint,
+  ObjectFieldBlob,
+  ObjectFieldBlockchainAddress,
+  Params,
+};
 declare const _default;
 export default _default;

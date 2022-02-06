@@ -33,15 +33,15 @@ archives:
       - README.md
 
 checksum:
-  name_template: 'checksums.txt'
+  name_template: "checksums.txt"
 snapshot:
   name_template: "{{ incpatch .Version }}-next"
 changelog:
   sort: asc
   filters:
     exclude:
-      - '^docs:'
-      - '^test:'
+      - "^docs:"
+      - "^test:"
 
 release:
   # Repo in which the release will be created.
@@ -76,8 +76,7 @@ release:
     - glob: "./release/**.tar.gz"
 
 brews:
-  -
-    tap:
+  - tap:
       owner: sonr-io
       name: sonr
       token: "{{ .Env.GITHUB_TOKEN }}"
@@ -90,8 +89,7 @@ brews:
 
 # .goreleaser.yaml
 nfpms:
-  -
-    package_name: sonr
+  - package_name: sonr
     vendor: Sonr Inc.
     homepage: https://sonr.io/
     maintainer: The Sonr Team <team@sonr.io>

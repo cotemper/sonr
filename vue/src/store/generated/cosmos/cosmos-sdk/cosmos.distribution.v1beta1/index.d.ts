@@ -17,6 +17,26 @@ import { ValidatorHistoricalRewardsRecord } from "./module/types/cosmos/distribu
 import { ValidatorCurrentRewardsRecord } from "./module/types/cosmos/distribution/v1beta1/genesis";
 import { DelegatorStartingInfoRecord } from "./module/types/cosmos/distribution/v1beta1/genesis";
 import { ValidatorSlashEventRecord } from "./module/types/cosmos/distribution/v1beta1/genesis";
-export { Params, ValidatorHistoricalRewards, ValidatorCurrentRewards, ValidatorAccumulatedCommission, ValidatorOutstandingRewards, ValidatorSlashEvent, ValidatorSlashEvents, FeePool, CommunityPoolSpendProposal, DelegatorStartingInfo, DelegationDelegatorReward, CommunityPoolSpendProposalWithDeposit, DelegatorWithdrawInfo, ValidatorOutstandingRewardsRecord, ValidatorAccumulatedCommissionRecord, ValidatorHistoricalRewardsRecord, ValidatorCurrentRewardsRecord, DelegatorStartingInfoRecord, ValidatorSlashEventRecord };
+export {
+  Params,
+  ValidatorHistoricalRewards,
+  ValidatorCurrentRewards,
+  ValidatorAccumulatedCommission,
+  ValidatorOutstandingRewards,
+  ValidatorSlashEvent,
+  ValidatorSlashEvents,
+  FeePool,
+  CommunityPoolSpendProposal,
+  DelegatorStartingInfo,
+  DelegationDelegatorReward,
+  CommunityPoolSpendProposalWithDeposit,
+  DelegatorWithdrawInfo,
+  ValidatorOutstandingRewardsRecord,
+  ValidatorAccumulatedCommissionRecord,
+  ValidatorHistoricalRewardsRecord,
+  ValidatorCurrentRewardsRecord,
+  DelegatorStartingInfoRecord,
+  ValidatorSlashEventRecord,
+};
 declare const _default;
 export default _default;

@@ -11,6 +11,20 @@ import { Metadata } from "./module/types/registry/peer";
 import { Peer } from "./module/types/registry/peer";
 import { Peer_Device } from "./module/types/registry/peer";
 import { Profile } from "./module/types/registry/peer";
-export { ServiceConfig, Did, DidDocument, Service, ServiceEndpoint, VerificationMethod, Params, Location, Location_Placemark, Metadata, Peer, Peer_Device, Profile };
+export {
+  ServiceConfig,
+  Did,
+  DidDocument,
+  Service,
+  ServiceEndpoint,
+  VerificationMethod,
+  Params,
+  Location,
+  Location_Placemark,
+  Metadata,
+  Peer,
+  Peer_Device,
+  Profile,
+};
 declare const _default;
 export default _default;

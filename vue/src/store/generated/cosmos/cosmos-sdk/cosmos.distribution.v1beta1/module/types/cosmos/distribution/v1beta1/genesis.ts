@@ -1169,9 +1169,10 @@ export const GenesisState = {
       obj.outstandingRewards = [];
     }
     if (message.validatorAccumulatedCommissions) {
-      obj.validatorAccumulatedCommissions = message.validatorAccumulatedCommissions.map(
-        (e) => (e ? ValidatorAccumulatedCommissionRecord.toJSON(e) : undefined)
-      );
+      obj.validatorAccumulatedCommissions =
+        message.validatorAccumulatedCommissions.map((e) =>
+          e ? ValidatorAccumulatedCommissionRecord.toJSON(e) : undefined
+        );
     } else {
       obj.validatorAccumulatedCommissions = [];
     }

@@ -3,6 +3,12 @@ import { ValidatorMissedBlocks } from "./module/types/cosmos/slashing/v1beta1/ge
 import { MissedBlock } from "./module/types/cosmos/slashing/v1beta1/genesis";
 import { ValidatorSigningInfo } from "./module/types/cosmos/slashing/v1beta1/slashing";
 import { Params } from "./module/types/cosmos/slashing/v1beta1/slashing";
-export { SigningInfo, ValidatorMissedBlocks, MissedBlock, ValidatorSigningInfo, Params };
+export {
+  SigningInfo,
+  ValidatorMissedBlocks,
+  MissedBlock,
+  ValidatorSigningInfo,
+  Params,
+};
 declare const _default;
 export default _default;

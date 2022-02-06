@@ -12,12 +12,8 @@
       "name": "MotorService"
     }
   ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "paths": {
     "/access/name": {
       "post": {
@@ -37,9 +33,7 @@
             }
           }
         },
-        "tags": [
-          "HighwayService"
-        ]
+        "tags": ["HighwayService"]
       }
     },
     "/access/service": {
@@ -60,9 +54,7 @@
             }
           }
         },
-        "tags": [
-          "HighwayService"
-        ]
+        "tags": ["HighwayService"]
       }
     },
     "/create/bucket": {
@@ -83,9 +75,7 @@
             }
           }
         },
-        "tags": [
-          "HighwayService"
-        ]
+        "tags": ["HighwayService"]
       }
     },
     "/create/channel": {
@@ -106,9 +96,7 @@
             }
           }
         },
-        "tags": [
-          "HighwayService"
-        ]
+        "tags": ["HighwayService"]
       }
     },
     "/create/object": {
@@ -129,9 +117,7 @@
             }
           }
         },
-        "tags": [
-          "HighwayService"
-        ]
+        "tags": ["HighwayService"]
       }
     },
     "/delete/blob": {
@@ -152,9 +138,7 @@
             }
           }
         },
-        "tags": [
-          "HighwayService"
-        ]
+        "tags": ["HighwayService"]
       }
     },
     "/delete/bucket": {
@@ -175,9 +159,7 @@
             }
           }
         },
-        "tags": [
-          "HighwayService"
-        ]
+        "tags": ["HighwayService"]
       }
     },
     "/delete/channel": {
@@ -198,9 +180,7 @@
             }
           }
         },
-        "tags": [
-          "HighwayService"
-        ]
+        "tags": ["HighwayService"]
       }
     },
     "/delete/object": {
@@ -221,9 +201,7 @@
             }
           }
         },
-        "tags": [
-          "HighwayService"
-        ]
+        "tags": ["HighwayService"]
       }
     },
     "/download/blob": {
@@ -244,9 +222,7 @@
             }
           }
         },
-        "tags": [
-          "HighwayService"
-        ]
+        "tags": ["HighwayService"]
       }
     },
     "/listen/channel": {
@@ -276,9 +252,7 @@
             }
           }
         },
-        "tags": [
-          "HighwayService"
-        ]
+        "tags": ["HighwayService"]
       }
     },
     "/parse/did": {
@@ -299,9 +273,7 @@
             }
           }
         },
-        "tags": [
-          "HighwayService"
-        ]
+        "tags": ["HighwayService"]
       }
     },
     "/read/bucket": {
@@ -322,9 +294,7 @@
             }
           }
         },
-        "tags": [
-          "HighwayService"
-        ]
+        "tags": ["HighwayService"]
       }
     },
     "/read/channel": {
@@ -345,9 +315,7 @@
             }
           }
         },
-        "tags": [
-          "HighwayService"
-        ]
+        "tags": ["HighwayService"]
       }
     },
     "/read/object": {
@@ -368,9 +336,7 @@
             }
           }
         },
-        "tags": [
-          "HighwayService"
-        ]
+        "tags": ["HighwayService"]
       }
     },
     "/register/name": {
@@ -391,9 +357,7 @@
             }
           }
         },
-        "tags": [
-          "HighwayService"
-        ]
+        "tags": ["HighwayService"]
       }
     },
     "/register/service": {
@@ -414,9 +378,7 @@
             }
           }
         },
-        "tags": [
-          "HighwayService"
-        ]
+        "tags": ["HighwayService"]
       }
     },
     "/resolve/did": {
@@ -437,9 +399,7 @@
             }
           }
         },
-        "tags": [
-          "HighwayService"
-        ]
+        "tags": ["HighwayService"]
       }
     },
     "/sync/blob": {
@@ -460,9 +420,7 @@
             }
           }
         },
-        "tags": [
-          "HighwayService"
-        ]
+        "tags": ["HighwayService"]
       }
     },
     "/update/bucket": {
@@ -483,9 +441,7 @@
             }
           }
         },
-        "tags": [
-          "HighwayService"
-        ]
+        "tags": ["HighwayService"]
       }
     },
     "/update/channel": {
@@ -506,9 +462,7 @@
             }
           }
         },
-        "tags": [
-          "HighwayService"
-        ]
+        "tags": ["HighwayService"]
       }
     },
     "/update/name": {
@@ -529,9 +483,7 @@
             }
           }
         },
-        "tags": [
-          "HighwayService"
-        ]
+        "tags": ["HighwayService"]
       }
     },
     "/update/object": {
@@ -552,9 +504,7 @@
             }
           }
         },
-        "tags": [
-          "HighwayService"
-        ]
+        "tags": ["HighwayService"]
       }
     },
     "/update/service": {
@@ -575,9 +525,7 @@
             }
           }
         },
-        "tags": [
-          "HighwayService"
-        ]
+        "tags": ["HighwayService"]
       }
     },
     "/upload/blob": {
@@ -598,9 +546,7 @@
             }
           }
         },
-        "tags": [
-          "HighwayService"
-        ]
+        "tags": ["HighwayService"]
       }
     }
   },

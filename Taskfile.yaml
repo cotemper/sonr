@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 includes:
   cli:
@@ -62,4 +62,3 @@ tasks:
       - rm -rf dist
       - rm -rf release
       - go mod tidy
-

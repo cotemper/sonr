@@ -10,11 +10,11 @@
 
 <script>
 export default {
-  name: 'Index',
+  name: "Index",
   computed: {
     address() {
-      return this.$store.getters['common/wallet/address']
+      return this.$store.getters["common/wallet/address"];
     },
   },
-}
+};
 </script>
